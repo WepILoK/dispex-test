@@ -2,16 +2,7 @@ import axios from "axios";
 import {IClients, IState} from "../store/ducks/companiesAndFlats/contracts/state";
 
 export const instance = axios.create({
-    baseURL: "https://dispex.org/api/vtest/",
-    headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-    },
-    proxy: {
-        host: 'https://dispex.org/api/vtest/',
-        port: 3000
-    },
-
+    baseURL: "https://dispex.org/api/vtest",
 })
 
 export interface IRequest {
@@ -33,11 +24,10 @@ export const Api = {
         await instance.delete<IClients>(`HousingStock/bind_client/${clientId}`)
     },
     async createClient(payload: IRequest) {
-        const {data} = await instance.post<{id: number, result: string}>("HousingStock/client",
-            {Name: payload.Name, Phone: payload.Phone, Email: payload.Email},)
+        const {data} = await instance.post<{id: number, result: string}>("HousingStock/client", payload)
         return data
     },
     async bindClient(payload: {AddressId: number, ClientId: number}) {
-        await instance.put(`HousingStock/client`, payload)
+        await instance.put(`HousingStock/bind_client`, payload)
     },
 }

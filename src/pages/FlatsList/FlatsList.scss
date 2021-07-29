@@ -1,11 +1,33 @@
 @import "src/App";
 
 .streets-list {
-  width: 700px;
+  width: 900px;
   padding: $padding $padding * 3;
   background-color: $bgColor;
   border: 1px solid $borderColor;
   border-radius: $padding * 1.5;
+
+  .btn {
+    cursor: pointer;
+    border-radius: $padding * 1.5;
+    margin: 8px 0;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .back {
+    background-color: #e2e2e2;
+    width: 145px;
+    padding: $padding;
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+  }
+
 
   .street {
     font-weight: 500;
@@ -24,7 +46,16 @@
 
   .flat {
     padding: 3px $padding * 3;
-    cursor: pointer;
+
+    &-title {
+      padding-left: 5px;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $hoverColor;
+        border-radius: $padding * 1.5;
+      }
+    }
 
     .clients {
       display: flex;
@@ -65,20 +96,11 @@
 
         .delete {
           padding: 6px;
-
           background-color: #c42525;
         }
       }
 
-      .btn {
-        cursor: pointer;
-        border-radius: $padding * 1.5;
-        margin: 8px 0;
 
-        &:hover {
-          opacity: 0.8;
-        }
-      }
     }
   }
 }

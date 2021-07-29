@@ -23,8 +23,14 @@ export interface ICompany {
     name: string
 }
 
+export enum LoadingClient {
+    LOADED = 'LOADED',
+    LOADING = 'LOADING',
+    NEVER = 'NEVER',
+}
+
 export interface IState {
     companies: ICompany[]
     flats: IFlats[]
-    loadingClient: boolean
+    loadingClient: LoadingClient
 }

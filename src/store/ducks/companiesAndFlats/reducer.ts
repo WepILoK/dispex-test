@@ -1,13 +1,13 @@
 import produce, {Draft} from "immer";
 
-import {IState} from "./contracts/state";
+import {IState, LoadingClient} from "./contracts/state";
 import {ActionsType, IActions} from "./contracts/actionTypes";
 
 
 const initialState: IState = {
     companies: [],
     flats: [],
-    loadingClient: false,
+    loadingClient: LoadingClient.NEVER,
 }
 
 export const companiesAndFlatsReducer = produce((draft: Draft<IState>, action: IActions) => {
@@ -15,7 +15,7 @@ export const companiesAndFlatsReducer = produce((draft: Draft<IState>, action: I
         case ActionsType.SET_COMPANIES:
             draft.companies = action.payload
             break;
-        case ActionsType.SET_APARTMENTS:
+        case ActionsType.SET_FLATS:
             draft.flats = action.payload
             break;
         case ActionsType.SET_LOADING_CLIENT:

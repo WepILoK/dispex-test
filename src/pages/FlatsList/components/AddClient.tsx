@@ -1,10 +1,19 @@
 import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
+
 import {addClient} from "../../../store/ducks/companiesAndFlats/actionCreators";
+
 
 interface IAddClientProps {
     addressId: number
 }
+
+enum InputEnum {
+    PHONE = 'phone',
+    EMAIL = 'email',
+    NAME = 'NAME'
+}
+
 
 export const AddClient: React.FC<IAddClientProps> = ({addressId}) => {
     const [inputValues, setInputValues] = useState({
@@ -26,28 +35,27 @@ export const AddClient: React.FC<IAddClientProps> = ({addressId}) => {
     }
 
     const createClient = () => {
-        if(inputValues.Phone.length > 2) {
         dispatch(addClient(inputValues, addressId))
-        }
+        setInputValues(prevState => ({...prevState, Phone: '', Email: '', Name: ''}))
     }
 
     return (
         <div className='create'>
-            <input className='phone'
-                   placeholder='phone'
-                   type='phone'
-                   value={inputValues.Phone}
-                   onChange={event => updateValue(event, InputEnum.PHONE)}/>
-            <input className='email'
-                   placeholder='email'
-                   type='email'
-                   value={inputValues.Email}
-                   onChange={event => updateValue(event, InputEnum.EMAIL)}/>
             <input className='name'
                    placeholder='name'
                    type='name'
                    value={inputValues.Name}
                    onChange={event => updateValue(event, InputEnum.NAME)}/>
+            <input className='email'
+                   placeholder='email'
+                   type='email'
+                   value={inputValues.Email}
+                   onChange={event => updateValue(event, InputEnum.EMAIL)}/>
+            <input className='phone'
+                   placeholder='phone'
+                   type='phone'
+                   value={inputValues.Phone}
+                   onChange={event => updateValue(event, InputEnum.PHONE)}/>
             <div
                 onClick={createClient}
                 className='btn add'>
@@ -56,9 +64,3 @@ export const AddClient: React.FC<IAddClientProps> = ({addressId}) => {
         </div>
     );
 };
-
-enum InputEnum {
-    PHONE = 'phone',
-    EMAIL = 'email',
-    NAME = 'NAME'
-}

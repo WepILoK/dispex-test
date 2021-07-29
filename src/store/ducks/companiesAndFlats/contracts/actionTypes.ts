@@ -1,9 +1,9 @@
 import {Action} from "redux";
-import {IState} from "./state";
+import {IState, LoadingClient} from "./state";
 
 export enum ActionsType {
     SET_COMPANIES = 'companiesAndFlats/SET_COMPANIES',
-    SET_APARTMENTS = 'companiesAndFlats/SET_APARTMENTS',
+    SET_FLATS = 'companiesAndFlats/SET_FLATS',
     SET_LOADING_CLIENT = 'companiesAndFlats/SET_LOADING_CLIENT',
 }
 
@@ -13,13 +13,13 @@ export interface ISetCompanies extends Action<ActionsType> {
 }
 
 export interface ISetApartments extends Action<ActionsType> {
-    type: ActionsType.SET_APARTMENTS
+    type: ActionsType.SET_FLATS
     payload: IState['flats']
 }
 
 export interface ISetLoadingClient extends Action<ActionsType> {
     type: ActionsType.SET_LOADING_CLIENT
-    payload: boolean
+    payload: LoadingClient
 }
 
 export type IActions =

@@ -1,10 +1,13 @@
 import React, {useEffect} from 'react';
 import {Route, Switch} from 'react-router-dom';
-import {Companies} from "./pages/HomePage/Companies";
 import {useDispatch} from "react-redux";
+
+import {Companies} from "./pages/HomePage/Companies";
 import {fetchCompanies} from "./store/ducks/companiesAndFlats/actionCreators";
-import './App.scss'
 import {FlatsList} from "./pages/FlatsList/FlatsList";
+
+import './App.scss'
+
 
 function App() {
     const dispatch = useDispatch()

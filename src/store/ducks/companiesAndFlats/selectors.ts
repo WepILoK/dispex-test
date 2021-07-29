@@ -1,5 +1,5 @@
 import {RootState} from "../../store";
-import {IState} from "./contracts/state";
+import {IState, LoadingClient} from "./contracts/state";
 
 export const selectCompaniesAndApartmentsState = (state: RootState): IState => state.companiesAndFlats
 
@@ -9,5 +9,5 @@ export const selectCompanies = (state: RootState): IState['companies'] =>
 export const selectApartments = (state: RootState): IState['flats'] =>
     selectCompaniesAndApartmentsState(state).flats
 
-export const selectLoadingClients = (state: RootState): IState['loadingClient'] =>
-    selectCompaniesAndApartmentsState(state).loadingClient
+export const selectLoadingClients = (state: RootState): boolean =>
+    selectCompaniesAndApartmentsState(state).loadingClient === LoadingClient.LOADING

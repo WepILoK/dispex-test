@@ -1,8 +1,10 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import React from 'react';
 import {Link} from 'react-router-dom';
-import {fetchApartments, fetchCompanies} from "../../store/ducks/companiesAndFlats/actionCreators";
+import {useDispatch, useSelector} from "react-redux";
+
+import {fetchApartments} from "../../store/ducks/companiesAndFlats/actionCreators";
 import {selectCompanies} from "../../store/ducks/companiesAndFlats/selectors";
+
 import './Companies.scss'
 
 
@@ -10,10 +12,9 @@ export const Companies: React.FC = () => {
     const companies = useSelector(selectCompanies)
     const dispatch = useDispatch()
 
-    const getCompanyApartments = (companyId: number): any => {
+    const getCompanyApartments = (companyId: number): void => {
         dispatch(fetchApartments(companyId))
     }
-
 
     if (companies.length) {
         return (

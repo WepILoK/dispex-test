@@ -1,7 +1,11 @@
-import {ActionsType, IActions, ISetApartments, ISetCompanies, ISetLoadingClient,} from "./contracts/actionTypes";
-import {IState} from "./contracts/state";
 import {Dispatch} from "redux";
+
+import {ActionsType, IActions,
+    ISetApartments, ISetCompanies,
+    ISetLoadingClient,} from "./contracts/actionTypes";
+import {IState, LoadingClient} from "./contracts/state";
 import {Api, IRequest} from "../../../api/api";
+
 
 export const setCompanies = (payload: IState['companies']): ISetCompanies => ({
     type: ActionsType.SET_COMPANIES,
@@ -9,11 +13,11 @@ export const setCompanies = (payload: IState['companies']): ISetCompanies => ({
 })
 
 export const setApartments = (payload: IState['flats']): ISetApartments => ({
-    type: ActionsType.SET_APARTMENTS,
+    type: ActionsType.SET_FLATS,
     payload
 })
 
-export const setLoadingClient = (payload: boolean): ISetLoadingClient => ({
+export const setLoadingClient = (payload: LoadingClient): ISetLoadingClient => ({
     type: ActionsType.SET_LOADING_CLIENT,
     payload
 })
@@ -43,9 +47,9 @@ export const fetchApartments = (companyId: number) => {
 export const deleteClient = (clientId: number) => {
     return async (dispatch: Dispatch<IActions>) => {
         try {
-            dispatch(setLoadingClient(true))
+            dispatch(setLoadingClient(LoadingClient.LOADING))
             await Api.removeClient(clientId)
-            dispatch(setLoadingClient(false))
+            dispatch(setLoadingClient(LoadingClient.LOADED))
         } catch (error) {
             console.log(error)
         }
@@ -54,11 +58,10 @@ export const deleteClient = (clientId: number) => {
 export const addClient = (payload: IRequest, addressId: number) => {
     return async (dispatch: Dispatch<IActions>) => {
         try {
-            dispatch(setLoadingClient(true))
-            console.log(payload, addressId)
+            dispatch(setLoadingClient(LoadingClient.LOADING))
             const {id} = await Api.createClient(payload)
             await Api.bindClient({AddressId: addressId, ClientId: id})
-            dispatch(setLoadingClient(false))
+            dispatch(setLoadingClient(LoadingClient.LOADED))
         } catch (error) {
             console.log(error)
         }

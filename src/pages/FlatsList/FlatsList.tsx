@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
+
 import {selectApartments, selectLoadingClients} from "../../store/ducks/companiesAndFlats/selectors";
 import {fetchApartments, setApartments} from "../../store/ducks/companiesAndFlats/actionCreators";
-import './FlatsList.scss'
 import {Client} from "./components/Client";
 import {AddClient} from "./components/AddClient";
+
+import './FlatsList.scss'
+
 
 export const FlatsList: React.FC = () => {
     const [visibleFlats, setVisibleFlats] = useState({visible: false, homeId: ''})
@@ -29,7 +32,6 @@ export const FlatsList: React.FC = () => {
 
     useEffect(() => {
         dispatch(fetchApartments(Number(params.id)))
-
         return () => {
             dispatch(setApartments([]))
         }
@@ -54,7 +56,8 @@ export const FlatsList: React.FC = () => {
                             : null}
                         {visibleFlats.visible && visibleFlats.homeId === item.building &&
                         <div className='flat'>
-                            <div onClick={() => toggleVisibleClients(item.flat)}>
+                            <div className='flat-title'
+                                onClick={() => toggleVisibleClients(item.flat)}>
                                 Квартира: {item.flat}/{item.clients.length}
                             </div>
                             {visibleClients.visible && visibleClients.flatId === item.flat &&
@@ -67,10 +70,24 @@ export const FlatsList: React.FC = () => {
                         </div>}
                     </div>
                 )}
+                <div className='btn back'>
+                    <Link to='/'>
+                        К списку компаний
+                    </Link>
+                </div>
             </div>
         )
     } else {
-        return null
+        return (
+            <div className='streets-list'>
+                Загрузка...
+                <div className='btn back'>
+                    <Link to='/'>
+                        К списку компаний
+                    </Link>
+                </div>
+            </div>
+        )
     }
 }
 

@@ -1,7 +1,8 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import React from 'react';
+import {useDispatch} from "react-redux";
+
 import {deleteClient} from "../../../store/ducks/companiesAndFlats/actionCreators";
-import {selectLoadingClients} from "../../../store/ducks/companiesAndFlats/selectors";
+
 
 interface IClientProps {
     bindId: number
@@ -10,7 +11,7 @@ interface IClientProps {
     phone: string
 }
 
-export const Client: React.FC<IClientProps> = ({name, email, phone, bindId}) => {
+export const Client: React.FC<IClientProps> =({name, email, phone, bindId}) => {
     const dispatch = useDispatch()
 
     const clickOnRemove = () => {
@@ -35,5 +36,5 @@ export const Client: React.FC<IClientProps> = ({name, email, phone, bindId}) => 
             </div>
         </div>
     );
-};
+}
 
