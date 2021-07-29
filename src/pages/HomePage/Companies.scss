@@ -1,0 +1,27 @@
+@import "src/App";
+
+.companies-list {
+  background-color: $bgColor;
+  border: 1px solid $borderColor;
+  border-radius: $padding * 1.5;
+
+  a {
+    text-decoration: none;
+    color: #000000;
+  }
+
+  .title {
+    padding: $padding $padding + 5px;
+    font-weight: 600;
+  }
+
+  .company {
+    cursor: pointer;
+    padding: $padding $padding * 3;
+    border-radius: $padding * 1.5;
+
+    &:hover {
+      background-color: $hoverColor;
+    }
+  }
+}
