@@ -71,8 +71,9 @@
       .create {
         display: flex;
         flex-wrap: wrap;
-        width: 150px;
         margin-top: 5px;
+        width: 155px;
+        height: 120px;
 
         input {
           width: 140px;
@@ -83,8 +84,8 @@
 
       .client {
         padding: 3px 5px;
-        min-width: 155px;
-        min-height: 120px;
+        width: 155px;
+        height: 120px;
 
         div {
           padding: 3px 0;
